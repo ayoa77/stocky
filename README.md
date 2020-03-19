@@ -16,7 +16,6 @@ By [Ayo Amadi](mailto:ayodeleamadi@gmail.com)
 5. Start your development server using `npm run dev`
 6, It is also production ready via heroku.
 7. Navigate to app in [browser](http://localhost:3000)
-8. Or take a look at the app here at [browser](http://localhost:3000)
 8. Enjoy!
 
 
