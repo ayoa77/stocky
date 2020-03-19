@@ -7,12 +7,13 @@ router.get("/", (req, res, next) => {
   res.render("signup", {
     title: "Signup",
     user: req.session.user,
+    csrfToken: req.csrfToken()
   });
 });
 
 // Get login page
 router.get("/login", (req, res, next) => {
-  res.render("login", { title: "Login" });
+  res.render("login", { title: "Login", csrfToken: req.csrfToken() });
 });
 
 // Post Signup
@@ -70,12 +71,10 @@ router.post("/login", (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user)
-        return res
-          .status(400)
-          .json({
-            message: "Email and password do not match.",
-            redirect: false
-          });
+        return res.status(400).json({
+          message: "Email and password do not match.",
+          redirect: false
+        });
       else if (!user.validPassword(password))
         return res.status(400).json({
           message: "Email and password do not match.",

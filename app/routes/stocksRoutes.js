@@ -8,6 +8,7 @@ router.get("/", (req, res, next) => {
   res.render("stocks", {
     title: "Stocks",
     user: req.session.user,
+    csrfToken: req.csrfToken()
   });
 });
 

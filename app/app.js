@@ -9,7 +9,10 @@ const MongoStore = require("connect-mongo")(session);
 const logger = require("morgan");
 const flash = require("connect-flash");
 const dotenv = require("dotenv");
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 const canMiddleware = require("./middleware/canMiddleware");
+
 
 const indexRouter = require("./routes/indexRoutes");
 const usersRouter = require("./routes/userRoutes");
@@ -65,20 +68,20 @@ app.use(function varsForPug(req, res, next) {
   next();
 });
 
-app.get("/robots.txt", function(req, res) {
+app.get("/robots.txt", (req, res) => {
   res.type("text/plain");
   res.send("\nDisallow:*");
 });
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/stocks", stocksRouter);
-
 // POST Logout
-router.post("/logout", (req, res, next) => {
+app.post("/logout", csrfProtection, (req, res, next) => {
   delete req.session.user;
   res.redirect("/");
 });
+
+app.use("/", csrfProtection, indexRouter);
+app.use("/users", csrfProtection, canMiddleware.noAuth, usersRouter);
+app.use("/stocks", csrfProtection, canMiddleware.needAuth, stocksRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
