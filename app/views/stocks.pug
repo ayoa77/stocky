@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  form#stockForm(action="/stocks" method="POST")
+    input#stockSymbol(type="text" name="stockSymbol" placeholder="Stock Symbol" required)
+    button(type="submit") Search
+
+  .hidden
+    p#s 
+    p.openPrice Open Price: 
+    p#o 
+    p.currentPrice Current Price:
+    p#c 
+    p.highPrice High Price:
+    p#h 
+    p.lowPrice Low Price:
+    p#l 
+    p.previousClosePrice Previous Close Price:
+    p#pc 
+    p.timestamp Timestamp: 
+    p#t 

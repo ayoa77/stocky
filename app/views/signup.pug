@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  form#submitSignup(action="/users" method="POST")
+    label(for="email") 
+      p Email
+    input(type="text" id="email" name="email" required)
+    label(for="password")
+      p Password
+    p Your password must be a mix of letters and numbers, longer than 6 characters, and must not contain spaces.
+    input(type="password" id="password" name="password" autocomplete="new-password" required)
+    label(for="confirmPassword")
+      p  Confirm Password
+    input(type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required)
+    button(type="submit") Submit
+

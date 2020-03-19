@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  if user
+    a(href='/stocks') Stocks
+  else
+  p
+    a(href='/users') Signup
+  p
+    a(href='/users/login') Login
