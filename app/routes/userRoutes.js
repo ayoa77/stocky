@@ -28,7 +28,7 @@ router.post("/", (req, res, next) => {
     });
   else if (regexForSpaces.test(password))
     return res.status(400).json({
-      message: "Sorry, password cannot contains spaces.",
+      message: "Sorry, password cannot contain spaces.",
       redirect: false
     });
   else if (password !== confirmPassword)
