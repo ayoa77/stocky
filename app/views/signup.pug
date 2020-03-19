@@ -1,16 +1,28 @@
 extends layout
 
 block content
-  form#submitSignup(action="/users" method="POST")
-    label(for="email") 
-      p Email
-    input(type="text" id="email" name="email" required)
-    label(for="password")
-      p Password
-    p Your password must be a mix of letters and numbers, longer than 6 characters, and must not contain spaces.
-    input(type="password" id="password" name="password" autocomplete="new-password" required)
-    label(for="confirmPassword")
-      p  Confirm Password
-    input(type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required)
-    button(type="submit") Submit
-
+  section.text-center
+    .cover-container.pb-5
+      .cover-inner.container
+        .row.justify-content-center
+          .col-xs-12.col-sm-10.col-lg-4
+            h2 Signup
+            form#submitSignup.mt-5(action="/users" method="POST")
+              input(type="hidden", name="_csrf", value=csrfToken)
+              label(for="email") 
+                p.chill-text Email
+              input.form-control(type="text" id="email" name="email" required)
+              br
+              br
+              label.mb-0(for="password")
+                p.chill-text Password
+              p Your password must be longer than 6 characters and must not contain spaces.
+              input.form-control(type="password" id="password" name="password" autocomplete="new-password" required)
+              br
+              label.my-0(for="confirmPassword")
+                p.chill-text  Confirm Password
+              input.form-control(type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password" required)
+              button.btn.btn-outline-white.btn-outline.mt-3(type="submit") Submit
+              br
+              p.mt-4 Already Signed Up?          
+                a.btn.btn-outline-white.btn-md.mb-2.ml-2(href='/users/login') Login

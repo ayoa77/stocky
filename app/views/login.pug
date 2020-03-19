@@ -1,11 +1,23 @@
 extends layout
 
 block content
-  form#submitSignup(action="/users/login" method="POST")
-    label(for="email") 
-      | Email
-    input(type="text" id="email" name="email" required)
-    br
-    label(for="password")
-      | Password
-    input(type="password" id="password" name="password" autocomplete="new-password" required)
+  section.text-center
+    .cover-container.pb-5
+      .cover-inner.container
+        .row.justify-content-center
+          .col-xs-12.col-sm-10.col-lg-5
+            h2 Login
+            form#submitSignup.mt-5(action="/users/login" method="POST")
+              input(type="hidden", name="_csrf", value=csrfToken)
+              label(for="email") 
+                p.chill-text Email
+              input.form-control(type="text" id="email" name="email" required)
+              br
+              label.mb-0(for="password")
+                p.chill-text Password
+              input.form-control(type="password" id="password" name="password" autocomplete="password" required)
+              button.btn.btn-outline-white.btn-outline.mt-3(type="submit") Submit
+              br
+              p.mt-4 No Account Yet?          
+                a.btn.btn-outline-white.btn-md.mb-2.ml-2(href='/users') Signup
+

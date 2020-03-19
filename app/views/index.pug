@@ -1,10 +1,25 @@
 extends layout
 
 block content
-  if user
-    a(href='/stocks') Stocks
-  else
-  p
-    a(href='/users') Signup
-  p
-    a(href='/users/login') Login
+  section.text-center.mt-6
+    .cover-container.pb-5
+      .cover-inner.container
+        h1.jumbotron-heading
+          | Get 
+          em your 
+          strong STOCK Prices Here 
+          if user
+            |Just Click Below To Check It Out
+          else
+            | Just Signup or Login Below
+        br
+        if user
+          a.btn.btn-outline-white.btn-lg.mb-2.ml-2(href='/stocks') Stocks
+        else
+          p
+            a.btn.btn-outline-white.btn-lg.mb-2.ml-2(href='/users') Signup
+          p
+            a.btn.btn-outline-white.btn-lg.mb-2.ml-2(href='/users/login') Login
+          p.chill-text
+            | After signing up, you'll be able to type in a stock symbol and then we'll fetch that stock symbol's information for the day!
+            

@@ -1,0 +1,175 @@
+body {
+  background: whitesmoke;
+  background: linear-gradient(90deg, #b92b27 0%, #1565C0 100%);
+  padding: 50px;
+  font: 14px;
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  color: whitesmoke;
+  ;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+/* body {
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #46484a;
+} */
+
+a {
+  color: #59a0d7;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 2.3rem;
+  font-weight: 400;
+}
+
+p {
+  color: #e8e8e8;
+  font-size: .9rem;
+}
+
+.divider {
+  display: block;
+  width: 6rem;
+  height: 0.3rem;
+  background-color: #dfe1e5;
+  margin: 2rem auto;
+}
+
+.navbar-trans {
+  background: transparent;
+}
+
+a.navbar-brand,
+a.logo {
+  color: #fff !important;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+li.nav-item .btn {
+  margin-top: .2rem;
+  margin-left: .4rem;
+}
+
+.cover h1 {
+  font-weight: 200;
+}
+
+p.chill-text {
+  margin: 1rem auto;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* .cover-container {
+  display: table;
+  height: 100%;
+  min-height: 44rem;
+  margin: 0 auto;
+} */
+
+.btn-primary,
+.btn-outline-primary,
+.btn-secondary,
+.btn-outline-secondary,
+.btn-white,
+.btn-outline-white,
+.btn-success,
+.btn-outline-success,
+.btn-info,
+.btn-outline-info,
+.btn-warning,
+.btn-outline-warning,
+.btn-danger,
+.btn-outline-danger {
+  font-size: .75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: .3rem;
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-white,
+.btn-outline-success,
+.btn-outline-info,
+.btn-outline-warning,
+.btn-outline-danger {
+  border-width: 0.15rem;
+}
+
+.btn-lg {
+  padding: 1.1rem 2.5rem;
+  font-size: .9rem;
+}
+
+.btn-outline-white,
+.btn-outline-white:visited {
+  background: none;
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-white:hover,
+.btn-outline-white:focus,
+.btn-outline-white:active {
+  color: #46484a;
+  background: #fff;
+}
+
+.link-white,
+link-white:visited {
+  font-size: .75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: .3rem;
+  border: 0;
+  color: #fff;
+}
+
+.mt-6,
+.my-6 {
+  margin-top: 6rem !important;
+}
+
+.mb-6,
+.my-6 {
+  margin-bottom: 6rem !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.alert p {
+  color: black;
+}
+
+.alert-dismissible .close {
+  z-index: 10000;
+}

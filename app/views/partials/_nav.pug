@@ -1,0 +1,13 @@
+nav.navbar.navbar-expand-sm.navbar-trans.navbar-inverse.fixed-top.mb-6
+  .container.mb-1
+    a.navbar-brand(href="/")
+      h2 Home
+    if user
+      ul.navbar-nav.mt-2.mt-md-0.ml-auto
+        li.nav-item.active
+          a.btn.btn-outline-white.btn-outline(href='/stocks')
+            |  Stocks
+        li.nav-item
+          form#logoutForm(name='logout_form' method='post' action='/users/logout')
+            input(type="hidden", name="_csrf", value=csrfToken)
+            button.btn.btn-outline-white.btn-outline(type="submit") Logout

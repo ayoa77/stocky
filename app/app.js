@@ -13,7 +13,6 @@ const csrf = require("csurf");
 const csrfProtection = csrf({ cookie: true });
 const canMiddleware = require("./middleware/canMiddleware");
 
-
 const indexRouter = require("./routes/indexRoutes");
 const usersRouter = require("./routes/userRoutes");
 const stocksRouter = require("./routes/stocksRoutes");
@@ -68,12 +67,13 @@ app.use(function varsForPug(req, res, next) {
   next();
 });
 
-app.get("/robots.txt", (req, res) => {
+app.get("/robots.txt", function(req, res) {
   res.type("text/plain");
   res.send("\nDisallow:*");
 });
-// POST Logout
-app.post("/logout", csrfProtection, (req, res, next) => {
+// POST Logout goes here to avoid middleware
+app.post("/users/logout", csrfProtection, (req, res, next) => {
+  console.log(req.session.uset);
   delete req.session.user;
   res.redirect("/");
 });
@@ -81,7 +81,6 @@ app.post("/logout", csrfProtection, (req, res, next) => {
 app.use("/", csrfProtection, indexRouter);
 app.use("/users", csrfProtection, canMiddleware.noAuth, usersRouter);
 app.use("/stocks", csrfProtection, canMiddleware.needAuth, stocksRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -102,3 +101,5 @@ app.use(function(err, req, res, next) {
 app.listen(8000, function(req, res) {
   console.log("listening on port 8000");
 });
+
+module.exports = app;

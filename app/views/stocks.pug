@@ -1,21 +1,31 @@
 extends layout
 
 block content
-  form#stockForm(action="/stocks" method="POST")
-    input#stockSymbol(type="text" name="stockSymbol" placeholder="Stock Symbol" required)
-    button(type="submit") Search
 
-  .hidden
-    p#s 
-    p.openPrice Open Price: 
-    p#o 
-    p.currentPrice Current Price:
-    p#c 
-    p.highPrice High Price:
-    p#h 
-    p.lowPrice Low Price:
-    p#l 
-    p.previousClosePrice Previous Close Price:
-    p#pc 
-    p.timestamp Timestamp: 
-    p#t 
+  section.text-center
+    .cover-container.pb-5
+      .cover-inner.container
+        .row.justify-content-center
+          .col-xs-12.col-sm-10.col-lg-4
+            h2 Stock Search
+            form#stockForm.mx-auto.mt-6(action="/stocks" method="POST")
+              input(type="hidden", name="_csrf", value=csrfToken)
+              .input-group
+                input#stockSymbol.form-control(type="text" name="stockSymbol" placeholder="Stock Symbol" required)
+                span.input-group-append
+                  button.btn.btn-outline-white.btn-outline(type="submit") Search
+
+            #stockStats.mt-5.hidden
+              h3#s.stock
+              p.openPrice Open Price: 
+              p#o.chill-text 
+              p.currentPrice Current Price:
+              p#c.chill-text 
+              p.highPrice High Price:
+              p#h.chill-text 
+              p.lowPrice Low Price:
+              p#l.chill-text 
+              p.previousClosePrice Previous Close Price:
+              p#pc.chill-text 
+              p.timestamp Timestamp: 
+              p#t.chill-text 
