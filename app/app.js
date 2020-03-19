@@ -9,6 +9,8 @@ const MongoStore = require("connect-mongo")(session);
 const logger = require("morgan");
 const flash = require("connect-flash");
 const dotenv = require("dotenv");
+dotenv.config();
+
 const csrf = require("csurf");
 const csrfProtection = csrf({ cookie: true });
 const canMiddleware = require("./middleware/canMiddleware");
@@ -29,7 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-let uri = "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
+let uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
 
 if ("development" == app.get("env")) {
   console.log("you are running in dev mode");
@@ -41,7 +43,6 @@ if ("development" == app.get("env")) {
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
-dotenv.config();
 
 app.use(
   session({
@@ -98,8 +99,8 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-app.listen(8000, function(req, res) {
-  console.log("listening on port 8000");
-});
+const port = process.env.PORT || 3000;
+
+app.listen(port);
 
 module.exports = app;
