@@ -20,7 +20,6 @@ router.get("/login", (req, res, next) => {
 router.post("/", (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
   const regexForSpaces = /\s/;
-
   //testing password before it is hashed
   if (password.length < 8)
     return res.status(400).json({

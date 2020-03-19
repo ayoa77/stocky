@@ -2,7 +2,6 @@ const expect = require("expect");
 const app = require("../app");
 const { User } = require("../models/userModel");
 const request = require("supertest");
-const http = require("http");
 
 const { users, seedDummyUsers } = require("./seed/seed");
 
@@ -56,34 +55,6 @@ describe("POST /users", () => {
   });
 });
 
-describe("POST /stocks", () => {
-  it("Should find a stock", done => {
-    var stockSymbol = "CRS";
-
-    request(app)
-      .post("/stocks")
-      .send({ stockSymbol })
-      .expect(200)
-      .expect(res => {
-        expect(res.body.response.o).toBeGreaterThan(0);
-        expect(res.body.response.s).toBe(stockSymbol);
-      })
-      .end((err, res) => {
-        if (err) return done(err);
-        else done();
-      });
-  });
-
-  it("Should return 404 if stock not found", done => {
-    var stockSymbol = "nostocky";
-    request(app)
-      .post("/stocks")
-      .send({ stockSymbol })
-      .expect(404)
-      .end(done);
-  });
-});
-
 describe("POST /users/login", () => {
   it("Should login user", done => {
     request(app)
@@ -117,5 +88,32 @@ describe("POST /users/login", () => {
         if (err) return done(err);
         else done();
       });
+  });
+});
+
+describe("POST /stocks", () => {
+  it("Should find a stock", done => {
+    var stockSymbol = "AAPL";
+    request(app)
+      .post("/stocks")
+      .send({ stockSymbol })
+      .expect(200)
+      .expect(res => {
+        expect(res.body.response.o).toBeGreaterThan(0);
+        expect(res.body.response.s).toBe(stockSymbol);
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        else done();
+      });
+  });
+
+  it("Should return 404 if stock not found", done => {
+    var stockSymbol = "nostocky";
+    request(app)
+      .post("/stocks")
+      .send({ stockSymbol })
+      .expect(404)
+      .end(done);
   });
 });

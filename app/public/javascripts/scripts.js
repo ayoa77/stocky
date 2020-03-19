@@ -47,7 +47,6 @@ $("#stockForm").on("submit", function(event) {
   event.preventDefault();
   $("#stockStats").fadeOut();
   $(".alert").hide();
-  console.log("submitting");
 
   var form = $("#stockForm");
   var input = form.serialize();
@@ -57,7 +56,6 @@ $("#stockForm").on("submit", function(event) {
         var stock = data.response;
         for (var firstLetter in stock) {
           var id = "#" + firstLetter;
-          console.log(id);
           $(id).text(stock[firstLetter]);
         }
 
@@ -66,7 +64,6 @@ $("#stockForm").on("submit", function(event) {
       }
     })
     .fail(function(data) {
-      console.log(data);
       if ((data && data.message) || (data && data.responseJSON))
         revealErrorAlert(data.message || data.responseJSON.message);
     });

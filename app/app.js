@@ -11,15 +11,20 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const csrf = require("csurf");
-const csrfProtection = csrf({ cookie: true });
-const canMiddleware = require("./middleware/canMiddleware");
+
+const {noAuth,needAuth} = require("./middleware/canMiddleware");
 
 const indexRouter = require("./routes/indexRoutes");
-const usersRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/userRoutes");
 const stocksRouter = require("./routes/stocksRoutes");
 
 const app = express();
+
+const csrf = require("csurf");
+let csrfProtection;
+if (app.get('env') === "test")
+  csrfProtection = csrf({ ignoreMethods: ["GET", "POST"] });
+else csrfProtection = csrf({ cookie: true });
 
 // view engine setup for pug
 app.set("views", path.join(__dirname, "views"));
@@ -31,17 +36,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-let uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
+var uri = "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
 
-if ("development" == app.get("env")) {
+if ("production" != app.get("env")) {
   console.log("you are running in dev mode");
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   app.locals.pretty = true;
 } else if ("production") {
   console.log("you are running in production");
-  uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";  
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
-
 
 app.use(
   session({
@@ -54,6 +59,7 @@ app.use(
   })
 );
 app.use(flash());
+
 
 // this programmatically loops through all models
 // in the models folder and requires them
@@ -73,14 +79,13 @@ app.get("/robots.txt", function(req, res) {
 });
 // POST Logout goes here to avoid middleware
 app.post("/users/logout", csrfProtection, (req, res, next) => {
-  console.log(req.session.uset);
   delete req.session.user;
   res.redirect("/");
 });
 
 app.use("/", csrfProtection, indexRouter);
-app.use("/users", csrfProtection, canMiddleware.noAuth, usersRouter);
-app.use("/stocks", csrfProtection, canMiddleware.needAuth, stocksRouter);
+app.use("/users", csrfProtection, noAuth, userRouter);
+app.use("/stocks", csrfProtection, needAuth, stocksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
