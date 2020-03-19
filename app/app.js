@@ -72,7 +72,8 @@ app.use(function varsForPug(req, res, next) {
   next();
 });
 
-app.get("/robots.txt", function(req,  res.type("text/plain")=>;
+app.get("/robots.txt", function(req, res) {
+  res.type("text/plain");
   res.send("\nDisallow:*");
 });
 // POST Logout goes here to avoid middleware
@@ -86,12 +87,12 @@ app.use("/users", csrfProtection, noAuth, userRouter);
 app.use("/stocks", csrfProtection, needAuth, stocksRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) =>{
+app.use(function(req, res, next) {
   next(createError(404, "This page does not exist!"));
 });
 
 // error handler
-app.use((err, req, res, next) =>{
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

@@ -4,19 +4,25 @@ A fun app to go and get stocks
 By [Ayo Amadi](mailto:ayodeleamadi@gmail.com)
 
 [ayo.works](https://ayo.works)
+
 [stocky-two.herokuapp.com](http://stocky-two.herkuapp.com/)
 
 ## Instructions
 
 1. Navigate to [repo](https://github.com/ayoa77/stocky)
 2. Clone locally using
-   `git clone git@github.com:ayoa77/stocky.git`
+   `git clone https://github.com/ayoa77/stocky.git`
 3. Install dependencies using `npm install`
-4. Run tests using `npm test`
-5. Start your development server using `npm run dev`
-6, It is also production ready via heroku.
-7. Navigate to app in [browser](http://localhost:3000)
-8. Enjoy!
+4. Create a .env and a .env.test file at the root
+5. Set your environment variables to the following
+6. FINNHUB_SECRET={from finnhub.io} SESSION_SECRET{whateverYOUDlike}
+7. These should be the same for both except for the port key.
+8. I recommend .env - port=3000 & .env.test - port=3002
+9. Run tests using `npm test`
+10. Start your development server using `npm run dev`
+11. It is also production ready via heroku.
+12. Navigate to app in [browser](http://localhost:3000)
+13. Enjoy!
 
 
 ## Discussion
