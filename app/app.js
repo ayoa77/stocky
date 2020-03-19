@@ -9,8 +9,11 @@ const MongoStore = require("connect-mongo")(session);
 const logger = require("morgan");
 const flash = require("connect-flash");
 const dotenv = require("dotenv");
+const canMiddleware = require("./middleware/canMiddleware");
 
 const indexRouter = require("./routes/indexRoutes");
+const usersRouter = require("./routes/usersRoutes");
+const stocksRouter = require("./routes/stocksRoutes");
 
 const app = express();
 
@@ -68,6 +71,14 @@ app.get("/robots.txt", function(req, res) {
 });
 
 app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/stocks", stocksRouter);
+
+// POST Logout
+router.post("/logout", (req, res, next) => {
+  delete req.session.user;
+  res.redirect("/");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
