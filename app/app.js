@@ -11,8 +11,7 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
-const {noAuth,needAuth} = require("./middleware/canMiddleware");
+const { noAuth, needAuth } = require("./middleware/canMiddleware");
 
 const indexRouter = require("./routes/indexRoutes");
 const userRouter = require("./routes/userRoutes");
@@ -22,7 +21,7 @@ const app = express();
 
 const csrf = require("csurf");
 let csrfProtection;
-if (app.get('env') === "test")
+if (app.get("env") === "test")
   csrfProtection = csrf({ ignoreMethods: ["GET", "POST"] });
 else csrfProtection = csrf({ cookie: true });
 
@@ -44,7 +43,9 @@ if ("production" != app.get("env")) {
   app.locals.pretty = true;
 } else if ("production") {
   console.log("you are running in production");
-  uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";  
+  uri =
+    process.env.MONGODB_URI ||
+    "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
