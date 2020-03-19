@@ -11,8 +11,7 @@ const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
-const {noAuth,needAuth} = require("./middleware/canMiddleware");
+const { noAuth, needAuth } = require("./middleware/canMiddleware");
 
 const indexRouter = require("./routes/indexRoutes");
 const userRouter = require("./routes/userRoutes");
@@ -22,7 +21,7 @@ const app = express();
 
 const csrf = require("csurf");
 let csrfProtection;
-if (app.get('env') === "test")
+if (app.get("env") === "test")
   csrfProtection = csrf({ ignoreMethods: ["GET", "POST"] });
 else csrfProtection = csrf({ cookie: true });
 
@@ -44,7 +43,9 @@ if ("production" != app.get("env")) {
   app.locals.pretty = true;
 } else if ("production") {
   console.log("you are running in production");
-  uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";  
+  uri =
+    process.env.MONGODB_URI ||
+    "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
@@ -72,7 +73,8 @@ app.use(function varsForPug(req, res, next) {
   next();
 });
 
-app.get("/robots.txt", function(req,  res.type("text/plain")=>;
+app.get("/robots.txt", function(req, res) {
+  res.type("text/plain");
   res.send("\nDisallow:*");
 });
 // POST Logout goes here to avoid middleware
@@ -86,12 +88,12 @@ app.use("/users", csrfProtection, noAuth, userRouter);
 app.use("/stocks", csrfProtection, needAuth, stocksRouter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) =>{
+app.use(function(req, res, next) {
   next(createError(404, "This page does not exist!"));
 });
 
 // error handler
-app.use((err, req, res, next) =>{
+app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
