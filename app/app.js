@@ -39,8 +39,7 @@ if ("development" == app.get("env")) {
   app.locals.pretty = true;
 } else if ("production") {
   console.log("you are running in production");
-  uri = "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";
-  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/stock-data?socketTimeoutMS=100000";  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 
