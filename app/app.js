@@ -12,7 +12,7 @@ const dotenv = require("dotenv");
 const canMiddleware = require("./middleware/canMiddleware");
 
 const indexRouter = require("./routes/indexRoutes");
-const usersRouter = require("./routes/usersRoutes");
+const usersRouter = require("./routes/userRoutes");
 const stocksRouter = require("./routes/stocksRoutes");
 
 const app = express();
