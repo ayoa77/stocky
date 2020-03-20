@@ -5,7 +5,7 @@ By [Ayo Amadi](mailto:ayodeleamadi@gmail.com)
 
 [ayo.works](https://ayo.works)
 
-[stocky-two.herokuapp.com](http://stocky-two.herkuapp.com/)
+[stocky-two.herokuapp.com](http://stocky-two.herokuapp.com/)
 
 ## Instructions
 
