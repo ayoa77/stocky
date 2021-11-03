@@ -27,7 +27,7 @@
     "morgan": "~1.9.1",
     "pug": "2.0.4",
     "request": "^2.88.2",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "expect": "^25.1.0",
